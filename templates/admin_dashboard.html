@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://bootswatch.com/5/united/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/dash.css">
+    <title>Panel de Administrador</title>
+
+    <!--------  Inconscount CSS ------->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <a target="_blank" href="https://icons8.com/icon/ABBSjQJK83zf/user"></a><a target="_blank" href="https://icons8.com"></a>
+
+
+</head>
+
+<body>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+                <img src="/static/images/logo.png" alt="">
+            </div>
+
+            <span class="logo_name">Backup Sectur</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="#">
+                        <i class="uil uil-estate"></i>
+                        <span class="link-name">Inicio</span>
+                    </a></li>
+                <li><a href="https://www.guerrero.gob.mx/dependencia/sector-central/secretaria-de-turismo/">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Contenido</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="uil uil-pen"></i>
+                        <span class="link-name">Redacción</span>
+                    </a></li>
+                <li><a href="https://www.guerrero.gob.mx/sala-de-prensa/">
+                         <i class="uil uil-newspaper"></i>
+                        <span class="link-name">Noticias</span>
+                    </a></li>
+                <li><a href="https://www.datatur.sectur.gob.mx/ITxEF/ITxEF_GRO.aspx">
+                         <i class="uil uil-analytics"></i>
+                        <span class="link-name">Estadística</span>
+                    </a></li>
+            </ul>
+
+            <ul class="logout-mode">
+                <li><a href="/prin">
+                        <i class="uil uil-signout"></i>
+                        <span class="link-name">Logout</span>
+                    </a></li>
+
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                        <span class="link-name">Dark Mode</span>
+                    </a>
+                    
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+            <!--USUARIO O ADMINISTRADOR-->
+            <div class="search-box"><a>Panel de Administrador</a>
+                <img class="admin-panel-img" src="/static/images/turismo.png" alt="img">
+            </div>
+            
+        </div>
+
+
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <i class="uil uil-user"></i>
+                    <span class="text">Departamentos de Secretaria de Turismo </span>
+                </div>
+
+                <div class="container mt-5">
+                    <div class="user-cards-container">
+                        {% for username, _ in user_pdfs_grouped.items() %}
+                        <div class="user-card p-3" data-username="{{ username }}">
+                            <img src="/static/images/usuario1.png" alt="img">
+                            <a>{{ username }}</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // Obtener todas las tarjetas de usuario
+                var userCards = document.querySelectorAll('.user-card');
+
+                // Agregar evento de clic a cada tarjeta de usuario
+                userCards.forEach(function (card) {
+                    card.addEventListener('click', function () {
+                        // Obtener el nombre de usuario asociado a la tarjeta
+                        var username = card.dataset.username;
+                        // Redirigir a la ruta para mostrar los PDFs del usuario
+                        window.location.href = '/admin/user/' + username;
+                    });
+                });
+            </script>
+
+
+    </section>
+
+    <script src="../static/script.js"></script>
+
+</body>
+
+</html>

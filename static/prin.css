@@ -1,0 +1,70 @@
+/* Estilos generales */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image:  url(/static/images/fondo.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+}
+
+.container {
+    text-align: center;
+}
+
+/* Estilos para el texto "Selecciona tu rol" */
+.role-text {
+    font-size: 32px; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+    margin-bottom: 30px; /* Espacio bajo el texto */
+}
+
+/* Estilos para los botones */
+.btn-container {
+    margin-top: 20px; /* Margen superior */
+    display: flex;
+    flex-direction: column; /* Coloca los botones en una columna */
+    align-items: center; /* Centra los botones horizontalmente */
+}
+
+.btn-container .btn {
+    padding: 1.3em 3em;
+    width: 300px;
+    /* Ancho del botón */
+    height: 80px;
+    /* Alto del botón */
+    margin: 10px 0;
+    /* Margen entre los botones */
+    font-size: 24px !important;
+    /* Tamaño del texto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    background-color: #DD761C;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+
+
+.btn-container .btn:hover {
+    background-color: #E65C19;
+    box-shadow: 0px 15px 20px #a0440e;
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.btn-container .btn:active {
+    transform: translateY(-1px);
+}

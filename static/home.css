@@ -1,0 +1,563 @@
+/*----------    Google Font Import - Poppins     ----------*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans", sans-serif;
+}
+
+:root {
+    --primary-color: #0E4BF1;
+    --panel-color: #FFF;
+    --text-color: #000;
+    --black-light-color: #707070;
+    --border-color: #e6e5e5;
+    --toggle-color: #DDD;
+    --box1-color: #4DA3FF;
+    --box2-color: #FFE6AC;
+    --box3-color: #E7D1FC;
+    --title-icon-color: #fff;
+    --card-bg-color: #FFD18E;
+    --special-color: #DD761C;
+    --orange-color: #E65C19;
+
+    --tran-05: all 0.5s ease;
+    --tran-03: all 0.3s ease;
+    --tran-02: all 0.2s ease;
+}
+
+body.dark {
+    --primary-color: #CCC;
+    --panel-color: #242526;
+    --text-color: #CCC;
+    --black-light-color: #CCC;
+    --border-color: #4D4C4C;
+    --toggle-color: #FFF;
+    --box1-color: #3A3B3C;
+    --box2-color: #3A3B3C;
+    --box3-color: #3A3B3C;
+    --title-icon-color: #CCC;
+    --card-bg-color: #939185;
+    --special-color: #CCC;
+    --orange-color: #CCC;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-color);
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 320px;
+    padding: 10px 14px;
+    background-color: var(--panel-color);
+    border-right: 3px solid var(--border-color);
+    transition: var(--tran-05);
+}
+
+nav.close {
+    width: 77px;
+}
+
+nav .logo-name {
+    display: flex;
+    align-items: center;
+}
+
+nav .logo-image {
+    display: flex;
+    justify-content: center;
+    min-width: 45px;
+}
+
+nav .logo-image img {
+    width: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    min-width: 60px;
+}
+
+nav .logo-name .logo_name {
+    margin-left: 17px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--special-color);
+    transition: var(--tran-05);
+}
+
+nav.close .logo_name {
+    opacity: 0;
+    pointer-events: none;
+}
+
+nav .menu-items {
+    margin-top: 40px;
+    height: calc(100% - 130px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-items li {
+    list-style: none;
+    margin-left: -25px;
+}
+
+.menu-items li a {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    text-decoration: none;
+    position: relative;
+}
+
+.nav-links li a:hover:before {
+    content: "";
+    position: absolute;
+    left: -15px;
+    height: 7px;
+    width: 7px;
+    border-radius: 50%;
+    background-color: var(--special-color);
+}
+
+body.dark li a:hover:before {
+    background-color: var(--special-color);
+}
+
+.menu-items li a i {
+    min-width: 30px;
+    font-size: 35px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+}
+
+.menu-items li a .link-name {
+    font-size: 24px;
+    font-weight: 400px;
+    color: var(--text-color);
+    margin-left: 14px;
+    transition: var(--tran-05);
+}
+
+nav.close li a .link-name {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-links li a:hover i,
+.nav-links li a:hover .link-name {
+    color: var(--special-color);
+}
+
+body.dark .nav-links li a:hover i,
+body.dark .nav-links li a:hover .link-name {
+    color: var(--special-color);
+}
+
+.menu-items .logout-mode {
+    padding-top: 10px;
+    border-top: 3px solid var(--border-color);
+}
+
+.menu-items .mode {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.menu-items .mode-toggle {
+    position: absolute;
+    right: 14px;
+    height: 50px;
+    min-width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.mode-toggle .switch {
+    position: relative;
+    display: inline-block;
+    border-radius: 25px;
+    height: 30px;
+    width: 57px;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+}
+
+.switch:before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: var(--panel-color);
+    border-radius: 50%;
+    transition: var(--tran-03);
+}
+
+body.dark .switch:before {
+    left: 30px;
+}
+
+.dashboard {
+    position: relative;
+    background-color: var(--panel-color);
+    left: 320px;
+    flex: 1;
+    width: calc(100% - 320px);
+    padding: 10px 14px;
+    transition: var(--tran-05);
+    border-top: 3px solid var(--border-color);
+}
+
+nav.close ~ .dashboard {
+    left: 77px;
+    width: calc(100% - 77px);
+}
+
+.dashboard .top {
+    position: fixed;
+    top: 0;
+    display: flex;
+    left: 320px;
+    width: calc(100% - 320px);
+    align-items: center;
+    padding: 30px 20px;
+    justify-content: space-between;
+    background-color: var(--panel-color);
+    transition: var(--tran-05);
+}
+
+nav.close ~ .dashboard .top {
+    left: 77px;
+    width: calc(100% - 77px);
+    border-top: 3px solid var(--border-color);
+}
+
+.dashboard .top .sidebar-toggle {
+    font-size: 30px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.dashboard .top .search-box a {
+    position: relative;
+    color: var(--special-color);
+    font-weight: 400;
+    font-size: 30px;
+    height: 45px;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 70px;
+}
+
+.dashboard .dash-content {
+    padding-top: 80px;
+}
+
+.dash-content .title {
+    display: flex;
+    align-items: center;
+    margin: 50px 0 30px 0;
+}
+
+.dash-content .title i {
+    position: relative;
+    height: 35px;
+    width: 35px;
+    border-radius: 6px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+}
+
+.dash-content .title .text {
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--text-color);
+    margin-left: 10px;
+}
+
+.dash-content .overview a {
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--text-color);
+    margin-left: 10px;
+}
+
+/* CSS */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    padding: 6px 6px 14px 50px;
+    min-width: 200px;
+    box-shadow: var(--box-shadow);
+    z-index: 1;
+    border-top: 3px solid var(--border-color);
+}
+
+.dropdown-content a {
+    font-size: 22px;
+    font-weight: 400px;
+    color: var(--text-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    color: var(--special-color);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+nav.close .dropdown-content {
+    left: 0;
+    top: calc(100% + 11px); /* Ajusta el desplazamiento vertical según sea necesario */
+    position: absolute;
+}
+
+/* Estilo especial para el estado contraído */
+nav.close .dropdown-content {
+    display: block;
+    position: relative;
+    top: auto;
+    left: auto;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+    min-width: 0;
+}
+
+nav.close .dropdown-content a {
+    display: block;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 20px; /* Ajusta el tamaño de la fuente si es necesario */
+    margin-left: 20px;
+}
+
+/* Quitar la bolita naranja al pasar el cursor cuando la navegación está contraída */
+nav.close .dropdown-content a:hover:before {
+    display: none;
+}
+
+@media (max-width: 1280px) {
+    nav {
+        width: 73px;
+    }
+    nav.close {
+        width: 320px;
+    }
+    nav .logo_name {
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav.close .logo_name {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    nav li a .link-name {
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav.close li a .link-name {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    nav ~ .dashboard {
+        left: 73px;
+        width: calc(100% - 73px);
+    }
+    nav.close ~ .dashboard {
+        left: 320px;
+        width: calc(100% - 320px);
+    }
+    nav ~ .dashboard .top {
+        left: 73px;
+        width: calc(100% - 73px);
+    }
+    nav.close ~ .dashboard .top {
+        left: 320px;
+        width: calc(100% - 320px);
+    }
+}
+
+/*----------    FORMULARIO  ----------*/
+.pdf-container {
+    margin-top: 30px;
+    padding: 20px;
+    font-size: 22px;
+    color: var(--text-color);
+}
+
+.pdf-container a {
+    font-size: 24px;
+    color: var(--text-color);
+}
+
+.pdf-container input[type="file"] {
+    margin-bottom: 15px;
+}
+
+ul.pdf-list {
+    padding: 0;
+    margin-left: 0px;
+}
+
+ul.pdf-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+ul.pdf-list li a {
+    margin-right: 10px;
+    /* Add some space between the download link and the delete icon */
+}
+
+ul.pdf-list li form {
+    display: inline;
+    /* Ensure the form stays inline with the text */
+    margin: 0;
+    padding: 0;
+}
+
+ul.pdf-list li .btn-link {
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+ul.pdf-list li .btn-link i {
+    font-size: 1.2rem;
+}
+
+/* Agrega este estilo al final de tu archivo CSS */
+.pdf-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pdf-actions {
+    margin-left: auto;
+}
+
+.pdf-actions .btn-link {
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.pdf-list .pdf-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    /* Ajusta este valor según sea necesario */
+}
+
+.pdf-list .pdf-item i {
+    margin-left: 110px;
+    /* Ajusta este valor según sea necesario */
+    margin-right: 110px;
+}
+
+/* Estilos para la lista de PDFs */
+.pdf-container {
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pdf-item {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+
+.pdf-link {
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.pdf-name {
+    font-weight: bold;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--orange-color);
+    color: var(--panel-color);
+    cursor: pointer;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    transition: all 0.5s ease;
+}
+
+input[type="submit"]:hover {
+    letter-spacing: 3px;
+    background-color: var(--orange-color);
+    color: var(--panel-color);
+}
+
+input[type="submit"]:active {
+    letter-spacing: 3px;
+    background-color: var(--orange-color);
+    color: var(--panel-color);
+
+    transform: translateY(10px);
+    transition: 100ms;
+}
+
+.pdf-details {
+    text-align: left;
+    /* Alinea el texto a la izquierda */
+    padding: 10px;
+    /* Agrega algo de padding si es necesario */
+    margin: 10px 0;
+    /* Margen superior e inferior */
+    font-size: 20px;
+}
+
+.download-icon {
+    font-size: 35px;
+    color: #0E4BF1 !important; /* Usa !important si es necesario */
+}
+
+.delete-icon {
+    font-size: 35px;
+    color: #FF0000 !important; /* Usa !important si es necesario */
+}
+
+.search-box img {
+    /* Mueve la imagen al final del contenedor flex */
+    width: 90px; /* Ajusta el tamaño de la imagen según sea necesario */
+    height: 90px;
+}

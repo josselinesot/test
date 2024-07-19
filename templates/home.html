@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://bootswatch.com/5/united/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/home.css">
+    <title>Home</title>
+
+    <!--------  Inconscount CSS ------->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+                <img src="/static/images/logo.png" alt="">
+            </div>
+            <span class="logo_name">Backup Sectur</span>
+        </div>
+    
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="/home">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Inicio</span>
+                </a></li>
+                <li><a href="https://www.guerrero.gob.mx/dependencia/sector-central/secretaria-de-turismo/">
+                    <i class="uil uil-files-landscapes"></i>
+                    <span class="link-name">Contenido</span>
+                </a></li>
+            <li><a href="#">
+                    <i class="uil uil-pen"></i>
+                    <span class="link-name">Redacción</span>
+                </a></li>
+                <li><a href="https://www.guerrero.gob.mx/sala-de-prensa/">
+                    <i class="uil uil-newspaper"></i>
+                   <span class="link-name">Noticias</span>
+               </a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">
+                        <i class="uil uil-file-contract-dollar"></i>
+                        <span class="link-name">Eventos</span>
+                    </a>
+                    <ul class="dropdown-content">
+                        <li><a href="{{ url_for('user_events_2022', username=username) }}">2022</a></li>
+                        <li><a href="{{ url_for('user_events_2023', username=username) }}">2023</a></li>
+                        <li><a href="{{ url_for('user_events_2024', username=username) }}">2024</a></li>
+                    </ul>
+                </li>
+            </ul>
+    
+            <ul class="logout-mode">
+                <li><a href="/prin">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a></li>
+    
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                        <span class="link-name">Dark Mode</span>
+                    </a>
+    
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+            <!--USUARIO O ADMINISTRADOR-->
+            <div class="search-box"><a>¡Dirección de, {{ username }}!</a>
+                <img class="admin-panel-img" src="/static/images/turismo.png" alt="img">
+            </div>
+        </div>
+
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <span class="text">Secretaría de Turismo Municipal de Acapulco</span>
+                </div>
+                
+                <div class="pdf-container">
+                    <a>Subir PDF</a>
+                    <form action="/upload_pdf" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="pdf_file" accept=".pdf" required>
+                        <input type="text" name="description" placeholder="Descripción del PDF" required> <!-- Campo de descripción -->
+                        <select name="year" required>
+                            <option value="">Seleccione el año</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                        </select>
+                        <input type="submit" value="Subir PDF">
+                    </form>   
+                    <!-- Barra de búsqueda -->
+                <div class="search-box">
+                    <form action="{{ url_for('search_pdfs') }}" method="GET">
+                        <input type="text" name="query" placeholder="Buscar documentos..." required>
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                    </form>
+                </div>
+
+
+                <div class="pdf-container">
+                    <a>Subidos</a>
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <ul class="pdf-list">
+                        {% for pdf in user_pdfs %}
+                        <li class="pdf-item">
+                            <span class="pdf-icon"><i class="uil uil-file-alt" style="font-size: 35px;"></i></span>
+                            <div class="pdf-details">
+                                <p><strong>Archivo:</strong> {{ pdf['filename'] }}</p>
+                                <p><strong>Descripción:</strong> {{ pdf['description'] }}</p>
+                                <p><strong>Subido en:</strong> {{ pdf['upload_time'] }}</p>
+                            </div>
+                            <div class="pdf-actions">
+                                <a href="{{ url_for('download_pdf', filename=pdf['filename']) }}" class="btn btn-link">
+                                    <i class="uil uil-file-download" style="font-size: 35px;" ></i>
+                                </a>
+                                <button class="btn btn-link" onclick="confirmDelete('{{ pdf.filename }}')"> <!-- Aquí se utiliza pdf.filename -->
+                                    <i class="uil uil-trash-alt" style="font-size: 35px;"></i>
+                                </button>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar eliminación</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Estás seguro de que deseas eliminar este PDF?
+                            </div>
+                            <div class="modal-footer">
+                                <form id="deleteForm" method="POST" action="">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Option 1: Bootstrap Bundle with Popper -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                <script>
+                    function confirmDelete(filename) {
+                        var deleteForm = document.getElementById('deleteForm');
+                        deleteForm.action = '/delete_pdf/' + filename;
+                        var confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+                        confirmDeleteModal.show();
+                    }
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <script src="../static/script.js"></script>
+</body>
+
+</html>
